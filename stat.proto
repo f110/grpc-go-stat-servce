@@ -1,0 +1,46 @@
+syntax = "proto3";
+package statservice;
+
+import "google/protobuf/any.proto";
+
+service Stat {
+    rpc Get (GetRequest) returns (GetResponse);
+}
+
+message GetRequest {}
+
+message GetResponse {
+    string time = 1;
+    string go_version = 2;
+    string go_os = 3;
+    string go_arch = 4;
+    int32 cpu_num = 5;
+    int32 go_max_procs = 6;
+    RuntimeStat runtime_stat = 7;
+    google.protobuf.Any internal_stat = 8;
+}
+
+message RuntimeStat {
+    string time = 1;
+    int32 goroutine_num = 2;
+    int32 cgo_call_num = 3;
+    uint64 memory_alloc = 4;
+    uint64 memory_total_alloc = 5;
+    uint64 memory_sys = 6;
+    uint64 memory_lookups = 7;
+    uint64 memory_mallocs = 8;
+    uint64 memory_frees = 9;
+    uint64 stack_in_use = 10;
+    uint64 heap_alloc = 11;
+    uint64 heap_sys = 12;
+    uint64 heap_idle = 13;
+    uint64 heap_in_use = 14;
+    uint64 heap_released = 15;
+    uint64 heap_objects = 16;
+    uint64 gc_next = 17;
+    uint64 gc_last = 18;
+    uint32 gc_num = 19;
+    double gc_per_second = 20;
+    double gc_pause_per_second = 21;
+    repeated double gc_pause = 22;
+}
